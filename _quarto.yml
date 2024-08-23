@@ -3,8 +3,12 @@ project:
   output-dir: docs
 
 website:
-  title: "tof1-2425"
-  repo-url: https://github.com/lektorodd/tof1-2425
+  title: "Teknologi og forskningslære 1 - AMA"
+  page-footer: 
+    left: "Torodd F. Ottestad"
+    right:
+      - icon: github
+        href: https://github.com/lektorodd/tof1-2425
   navbar:
     left:
       - href: index.qmd
