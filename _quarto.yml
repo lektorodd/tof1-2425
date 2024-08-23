@@ -4,11 +4,11 @@ project:
 
 website:
   title: "tof1-2425"
+  repo-url: https://github.com/lektorodd/tof1-2425
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
 
 format:
   html:

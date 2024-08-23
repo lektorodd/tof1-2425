@@ -1,7 +1,11 @@
 ---
-title: "tof1-2425"
+title: "Teknologi og forskningslære 1 - Amalie Skram vgs"
 ---
 
-This is a Quarto website.
+Relevant fagstoff til bruk i tof1 2024-2025. 
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+## Presentasjonar
+
+- [Om faget](/presentasjonar/intro-tof.html)
+- [Vitskapleg metode](/presentasjonar/vitskaplegmetode.html)
+
