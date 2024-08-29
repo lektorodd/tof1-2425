@@ -9,3 +9,5 @@ Relevant fagstoff til bruk i tof1 2024-2025.
 - [Om faget](/presentasjonar/intro-tof.html)
 - [Vitskapleg metode](/presentasjonar/vitskaplegmetode.html)
 
+## Programmering
+- [Intro 1 (29. august)](/intro1-python.ipynb)
