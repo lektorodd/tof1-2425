@@ -1,38 +1,10 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site"
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Teknologi og forskningslære 1 - Amalie Skram vgs",
-    "section": "",
-    "text": "Relevant fagstoff til bruk i tof1 2024-2025."
-  },
-  {
-    "objectID": "index.html#presentasjonar",
-    "href": "index.html#presentasjonar",
-    "title": "Teknologi og forskningslære 1 - Amalie Skram vgs",
-    "section": "Presentasjonar",
-    "text": "Presentasjonar\n\nOm faget\nVitskapleg metode"
-  },
-  {
     "objectID": "intro1-python.html",
     "href": "intro1-python.html",
     "title": "Intro til programmering i Python - Del 1",
     "section": "",
     "text": "Få denne fila inn i Jupyter Lab?\n\n\n\n\n\n\nOpne Jupyter Lab og velg Fil &gt; Open from URL...\n\nLim inn lenka under i feltet:\nwww.blablabla.no\n\nTrykk Enter og fila vil opna seg i Jupyter Lab.\n\n\n\n\nKort introduksjon til programmering i Python.\n\n\n\nprint(\"Hei ToF1!\")\n\nHei ToF1!\n\n\n\nprint(\"Lange tekstar med mange ord\")\n\nLange tekstar med mange ord\n\n\n\nprint(2+3)\nprint(\"2+3\")\nprint(\"2\" + \"3\")\n\n5\n2+3\n23\n\n\n\nprint(\"tor\"+\"odd\")\n\ntorodd\n\n\n\nprint(\"Tof)\n\nSyntaxError: unterminated string literal (detected at line 1) (3785197553.py, line 1)\n\n\nTips: sjekk heilt nederst i feilmeldinga.\nHer er det ein streng som ikkje er avslutta (det manglar hermeteikn).\n\n\n\n\nnamn = \"Torodd\" \nalder = 32\nprint(namn, alder)\n\nTorodd 32\n\n\nFinare utskrift med f-streng:\n\nprint(f\"Eg heiter {namn} og er {alder} år\")\n\nEg heiter Torodd og er 32 år\n\n\nMe kan be om input frå brukar:\n\n# Be om input\nnamn = input(\"Kva heiter du?\")\nalder = input(\"Kor gammal er du?\")\n\nprint(f\"Du heiter {namn} og er {alder} år\")\n\nDu heiter Torodd og er 32 år\n\n\n\n\n\nDet er ulike datatypar i Python:\n\nstreng = \"tekst\"   # str\nheiltal = 12       # int\ndesimaltal = 2.0   # float (flyttal)\nlogisk = True      # bool (enten True (1) eller False (0))\n\nDatatypar avgjer kva som går og ikkje. Til dømes kan me ikkje legga saman ein teksttren og eit heiltal:\n\nprint(streng + heiltall)\n\nNameError: name 'heiltall' is not defined\n\n\nTekst + tekst går derimot fint:\n\nprint(streng+streng)\n\nteksttekst\n\n\nSjå på denne. Ser du “logikken”? 😊\n\nprint(heiltal + logisk)\n\n13\n\n\nHeiltal + desimaltal gjer automatisk om datatypen til desimaltal:\n\nprint(heiltal + desimaltal)\n\n14.0\n\n\nVed input blir alt tolka som tekst. Me må derfor konvertera til tal for å rekna med det:\n\n# gjere om tekst til heiltal\nalder = int(input(\"Kor gammal er du?\"))\n\nprint(2024-alder)\n\n2008\n\n\n\n\n\n\na = 2\nb = 3\n\n\nprint(\"a + b =\", a+b)    \nprint(\"a - b =\", a-b)\nprint(\"a * b =\", a*b)\nprint(\"a / b =\", a/b)\nprint(\"a^b =\", a**b)\n\na + b = 5\na - b = -1\na * b = 6\na / b = 0.6666666666666666\na^b = 8\n\n\nI tillegg til dei “vanlege” rekneoperasjonane er det to litt andre operasjonar. Sjå om du ser mønsteret:\n\nprint(11%3)\nprint(11//3)\nprint() # blank linje\nprint(10%3)\nprint(10//3)\nprint() # blank linje\nprint(9%3)\nprint(9//3)\n\n\n2\n3\n\n1\n3\n\n0\n3\n\n\n11//3 er heiltalsdivisjon, altså går 3 opp i 11 tre gonger.\n11%3 er resten etter heiltalsdivisjon, altså 2. (\\(3\\cdot 3=9\\) og \\(11-9=2\\))\n\n\n\nBrukt det me har lært til no. Lag kalkulatorar som:\n\nBer brukaren skrive inn eit antal liter og som skriv ut kor mange desiliter det tilsvarer (sørg for at brukaren kan skrive inn desimaltal).\nBer brukaren skrive inn temperaturen i grader fahrenheit og som skriv ut temperaturen i grader celsius.\nBer brukaren skrive inn eit antal minutt og som skriv ut kor mange timar (og eventuelt minutt) det svarer til. Her kan det vere nyttig å bruke heiltalsdivisjon og modulus. input på 63 skal gje output “1 time og 3 minutt”.\n\nFår du det til kan du gjerne prøve å utvide kalkulator 3 til å dele inn i veker, dagar, timar og minutt (feks).\n\n\n\nliter = float(input(\"Skriv inn liter: \"))\ndesiliter = liter * 10\n\nprint(f\"{liter} L tilsvarar {desiliter:.2f} dL\") \n#:.2f avrundar til 2 desimalar\n\n3.14 L tilsvarar 31.40 dL\n\n\n\n\n\n\nminutt_input = int(input(\"Tal minutt: \"))\ntimar =  minutt_input // 60\nminutt = minutt_input % 60\nprint(f\"{minutt_input} min tilsvarar {timar} t og {minutt} min\")\n\n63 min tilsvarar 1 t og 3 min\n\n\n\n# tips for å holda styr på døgn, timar osv. \n# ha ein variabel for å holda styr på kor mange minutt \n# du har \"brukt opp\" etterkvart.\n\n\n\n\n\n\nvilkår\nløkker\nfunksjonar\nkanskje numpy og pyplot"
-  },
-  {
-    "objectID": "intro1-python.html#intro-til-programmering-i-python---del-1",
-    "href": "intro1-python.html#intro-til-programmering-i-python---del-1",
-    "title": "Intro til programmering i Python - Del 1",
-    "section": "",
-    "text": "Få denne fila inn i Jupyter Lab?\n\n\n\n\n\n\nOpne Jupyter Lab og velg Fil &gt; Open from URL...\n\nLim inn lenka under i feltet:\nwww.blablabla.no\n\nTrykk Enter og fila vil opna seg i Jupyter Lab."
   },
   {
     "objectID": "intro1-python.html#utskrift",
@@ -75,5 +47,33 @@
     "title": "Intro til programmering i Python - Del 1",
     "section": "",
     "text": "vilkår\nløkker\nfunksjonar\nkanskje numpy og pyplot"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Teknologi og forskningslære 1 - Amalie Skram vgs",
+    "section": "",
+    "text": "Relevant fagstoff til bruk i tof1 2024-2025."
+  },
+  {
+    "objectID": "index.html#presentasjonar",
+    "href": "index.html#presentasjonar",
+    "title": "Teknologi og forskningslære 1 - Amalie Skram vgs",
+    "section": "Presentasjonar",
+    "text": "Presentasjonar\n\nOm faget\nVitskapleg metode"
+  },
+  {
+    "objectID": "index.html#programmering",
+    "href": "index.html#programmering",
+    "title": "Teknologi og forskningslære 1 - Amalie Skram vgs",
+    "section": "Programmering",
+    "text": "Programmering\n\nIntro 1 (29. august)"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
   }
 ]
