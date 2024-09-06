@@ -11,3 +11,4 @@ Relevant fagstoff til bruk i tof1 2024-2025.
 
 ## Programmering
 - [Intro 1 (29. august)](/intro1-python.ipynb)
+- [Intro 2 (05. september)](/intro2-python.ipynb)

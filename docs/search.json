@@ -67,14 +67,14 @@
     "href": "index.html#programmering",
     "title": "Teknologi og forskningslære 1 - Amalie Skram vgs",
     "section": "Programmering",
-    "text": "Programmering\n\nIntro 1 (29. august)"
+    "text": "Programmering\n\nIntro 1 (29. august)\nIntro 2 (05. september)"
   },
   {
     "objectID": "intro2-python.html",
     "href": "intro2-python.html",
     "title": "Intro til programmering i Python - Del 2",
     "section": "",
-    "text": "Få denne fila inn i Jupyter Lab?\n\n\n\n\n\n\nOpne Jupyter Lab og velg Fil &gt; Open from URL...\n\nLim inn lenka under i feltet: ny lenke her\nhttps://raw.githubusercontent.com/lektorodd/tof1-2425/main/intro1-python.ipynb\n\nTrykk Enter og fila vil opna seg i Jupyter Lab."
+    "text": "Få denne fila inn i Jupyter Lab?\n\n\n\n\n\n\nOpne Jupyter Lab og velg Fil &gt; Open from URL...\n\nLim inn lenka under i feltet: ny lenke her\nhttps://raw.githubusercontent.com/lektorodd/tof1-2425/main/intro2-python.ipynb\n\nTrykk Enter og fila vil opna seg i Jupyter Lab."
   },
   {
     "objectID": "intro2-python.html#for-løkker",
