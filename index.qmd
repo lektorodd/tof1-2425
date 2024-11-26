@@ -19,5 +19,5 @@ Relevant fagstoff til bruk i tof1 2024-2025.
 
 ## Andre greier
 
-- Elektronikktest
-- Elektronikktest løysingsforslag
+- [Elektronikktest](elektronikktest.html)
+- [Elektronikktest løysingsforslag](elektronikktest%20lf.html)
