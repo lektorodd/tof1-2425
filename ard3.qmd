@@ -1,0 +1,156 @@
+---
+title: "Nivå 3 - *smart* trafikklys"
+---
+
+No skal me gjera trafikklyset "smart". 
+
+- Ultralydsensoren skal oppdage når nokon nærmar seg
+- Lyset skal skifte til grønt når nokon er nær nok
+- Me bruker HC-SR04 ultralydsensor
+
+Korleis virkar ultralydsensoren?
+
+- Sender ut ein høgfrekvens lyd (trigger)
+- Måler tida til lyden kjem tilbake (echo)
+
+## Komponentar
+
+- Alt frå [nivå 1](ard1.qmd) (trafikklys med 3 LED)
+- HC-SR04 ultralydsensor
+- 4 koblingskabler
+- (LED og transistor frå [nivå 2B](ard2b.qmd) er ikkje med her)
+
+## Kopling av sensor
+
+- VCC → 5V på Arduino
+- GND → GND på Arduino
+- TRIG → pin 7 på Arduino
+- ECHO → pin 6 på Arduino
+
+## Pseudokoden
+
+> 1. Oppsett:
+>    - LED-pins som før (2,3,4)
+>    - TRIG pin 7
+>    - ECHO pin 6
+> 
+> 2. Funksjon for å måle avstand:
+>    - Send ut kort puls på TRIG (10 mikrosekund)
+>    - Mål kor lang tid ECHO er HIGH
+>    - Rekn ut avstanden 
+> 
+> 3. Hovudprogram:
+>    - Mål avstanden
+>    - Viss avstand mindre enn 50cm:
+>      * Skift til grønt lys (med normal sekvens)
+>    - Viss avstand større enn 50cm og lyset er grønt:
+>      * Skift til raudt lys (med normal sekvens)
+>    - Vent litt før neste måling
+
+::: {.callout-tip}
+## Tips
+
+- Bruk `pulseIn()` for å måle ECHO-tid
+- *Veg, fart og tid* for å rekna ut avstanden (ECHO-tid i millisekund)
+- Legg inn ein liten delay for å unngå flimring
+- Test ulike avstandar
+:::
+
+## Oppgåver
+
+0) Start med å få sensoren til å funka
+  - Lyden går ca. 340 m/s. 
+  - Korleis kan me rekna ut avstanden til eit objekt?
+
+::: {.callout-tip}
+## Tips for utrekning av avstand
+
+For å lesa av utrekna avstand kan de feks. bruka denne kodesnutten ( i `loop`)
+```cpp
+// Skriv ut avstanden (for testing)
+Serial.print("Avstand: ");
+Serial.print(avstand);
+Serial.println(" cm");
+```
+:::
+
+::: {.callout-tip collapse="true"}
+## Startkode
+
+```cpp
+// LED-pins
+const int raudLys = 2;
+const int gulLys = 3;
+const int gronLys = 4;
+
+// Ultralydsensor
+const int trigPin = 7;
+const int echoPin = 6;
+
+// Variablar
+bool erRaudt = true;
+const int grenseAvstand = 50;  // Grense i cm
+
+void setup() {
+  // Set opp LED-pins
+  pinMode(raudLys, OUTPUT);
+  pinMode(gulLys, OUTPUT);
+  pinMode(gronLys, OUTPUT);
+  
+  // Set opp ultralydsensor
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  
+  // Start med raudt lys
+  digitalWrite(raudLys, HIGH);
+  digitalWrite(gulLys, LOW);
+  digitalWrite(gronLys, LOW);
+  
+  // Start seriell kommunikasjon for testing
+  Serial.begin(9600);
+}
+
+// Funksjon for å måle avstand
+int maalAvstand() {
+  // DIN KODE HER:
+  // 1. Send ut triggerpuls
+  // 2. Mål echo-tid med pulseIn()
+  // 3. Rekn ut avstanden i cm
+  return 0;  // Erstatt med din kode
+}
+
+void loop() {
+  // Les av avstanden
+  int avstand = maalAvstand();
+  
+  // Skriv ut avstanden (for testing)
+  Serial.print("Avstand: ");
+  Serial.print(avstand);
+  Serial.println(" cm");
+  
+  // DIN KODE HER:
+  // 1. Sjekk avstanden
+  // 2. Endre lys viss nødvendig
+  // 3. Legg inn kort pause
+}
+
+// Bruk funksjonane frå nivå 2 for å skifte lys
+void skiftTilGront() {
+  // Din kode her (kopier frå nivå 2)
+}
+
+void skiftTilRaudt() {
+  // Din kode her (kopier frå nivå 2)
+}
+```
+:::
+
+1) Få grunnfunksjonen til å virke:
+  - Mål avstand
+  - Skriv ut til serial monitor for å teste
+  - Få lyset til å skifte ved rett avstand
+
+2) Eksperimenter med:
+  - Kva er best grenseavstand?
+  - Kor ofte bør me måle avstanden?
+  - Kor lenge bør lyset vere grønt?

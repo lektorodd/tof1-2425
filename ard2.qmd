@@ -1,0 +1,103 @@
+---
+title: "Nivå 2 - legge til knappstyring"
+---
+
+No skal me legga til ein knapp!
+
+## Knappen skal
+
+- Endre trafikklyset frå raudt til grønt (eller omvendt) når den blir trykt
+- Me bruker intern pullup-motstand i Arduino (de må finne ut kva dette er!)
+- Det skal følge normal trafikklys-sekvens ved endring (gult lys mellom)
+
+## Me treng
+- alt frå [steg 1](ard1.qmd)
+- 1 knapp med leidningar
+
+## Kopling
+Knappen skal koplast til pin 5 og jord
+
+---
+
+### 🔎 Før de programmerer
+
+- Kva er ein pullup-motstand?
+- Kvifor treng me pullup-motstand med knappar?
+- Kva betyr "intern pullup"?
+- Kva skjer viss me ikkje bruker pullup?
+
+### 👀 Sjå på koden i boksen under
+
+::: {.callout-note collapse="true"}
+## Koden
+
+```cpp
+// Led-pins er som før
+const int raudLys = 2;
+const int gulLys = 3;
+const int gronLys = 4;
+const int knappPin = 5;     // Pin for knappen
+
+// Variabel for å hugse tilstanden til lyset
+bool erRaudt = true;        // true = raudt lys, false = grønt lys
+
+void setup() {
+  // Set opp LED-pins som før
+  pinMode(raudLys, OUTPUT);
+  pinMode(gulLys, OUTPUT);
+  pinMode(gronLys, OUTPUT);
+  
+  // Set opp knappen med intern pullup
+  pinMode(knappPin, INPUT_PULLUP);
+  
+  // Start med raudt lys
+  digitalWrite(raudLys, HIGH);
+  digitalWrite(gulLys, LOW);
+  digitalWrite(gronLys, LOW);
+}
+
+void loop() {
+  // Les av knappen (LOW = trykt, pga pullup)
+  if (digitalRead(knappPin) == LOW) {
+    if (erRaudt) {
+      // Viss lyset er raudt, bytt til grønt
+      skiftTilGront();
+    } else {
+      // Viss lyset er grønt, bytt til raudt
+      skiftTilRaudt();
+    }
+    delay(500);  // Enkel "debounce" - unngå fleire knappetrykk
+  }
+}
+
+// Funksjon for å skifte til grønt lys
+void skiftTilGront() {
+  digitalWrite(gulLys, HIGH);    // Raudt + gult
+  delay(1000);
+  digitalWrite(raudLys, LOW);     // Skru av raudt
+  digitalWrite(gulLys, LOW);     // Skru av gult
+  digitalWrite(gronLys, HIGH);  // Skru på grønt
+  erRaudt = false;              // Hugs at me no har grønt lys
+}
+
+// Funksjon for å skifte til raudt lys
+void skiftTilRaudt() {
+  digitalWrite(gronLys, LOW);   // Skru av grønt
+  digitalWrite(gulLys, HIGH);    // Skru på gult
+  delay(1000);
+  digitalWrite(gulLys, LOW);     // Skru av gult
+  digitalWrite(raudLys, HIGH);    // Skru på raudt
+  erRaudt = true;               // Hugs at me no har raudt lys
+}
+```
+:::
+
+- Kva gjer variabelen `erRaudt`?
+- Kvifor er knappen `LOW` når den er trykt?
+- Kva er `delay(500)` til?
+
+### 💪 Utfordring
+
+Kan du få knappen til å virke berre når lyset har vore same farge i minst 5 sekund?
+
+**Hint:** Du må bruke `millis()` for å måle tid

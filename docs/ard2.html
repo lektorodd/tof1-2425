@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – Teknologi og forskningslære 1 - AMA</title>
+<title>Nivå 2 - legge til knappstyring – Teknologi og forskningslære 1 - AMA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -103,15 +137,28 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">På denne sida</h2>
+   
+  <ul>
+  <li><a href="#knappen-skal" id="toc-knappen-skal" class="nav-link active" data-scroll-target="#knappen-skal">Knappen skal</a></li>
+  <li><a href="#me-treng" id="toc-me-treng" class="nav-link" data-scroll-target="#me-treng">Me treng</a></li>
+  <li><a href="#kopling" id="toc-kopling" class="nav-link" data-scroll-target="#kopling">Kopling</a>
+  <ul class="collapse">
+  <li><a href="#før-de-programmerer" id="toc-før-de-programmerer" class="nav-link" data-scroll-target="#før-de-programmerer">🔎 Før de programmerer</a></li>
+  <li><a href="#sjå-på-koden-i-boksen-under" id="toc-sjå-på-koden-i-boksen-under" class="nav-link" data-scroll-target="#sjå-på-koden-i-boksen-under">👀 Sjå på koden i boksen under</a></li>
+  <li><a href="#utfordring" id="toc-utfordring" class="nav-link" data-scroll-target="#utfordring">💪 Utfordring</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">Nivå 2 - legge til knappstyring</h1>
 </div>
 
 
@@ -128,9 +175,123 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>About this site</p>
+<p>No skal me legga til ein knapp!</p>
+<section id="knappen-skal" class="level2">
+<h2 class="anchored" data-anchor-id="knappen-skal">Knappen skal</h2>
+<ul>
+<li>Endre trafikklyset frå raudt til grønt (eller omvendt) når den blir trykt</li>
+<li>Me bruker intern pullup-motstand i Arduino (de må finne ut kva dette er!)</li>
+<li>Det skal følge normal trafikklys-sekvens ved endring (gult lys mellom)</li>
+</ul>
+</section>
+<section id="me-treng" class="level2">
+<h2 class="anchored" data-anchor-id="me-treng">Me treng</h2>
+<ul>
+<li>alt frå <a href="./ard1.html">steg 1</a></li>
+<li>1 knapp med leidningar</li>
+</ul>
+</section>
+<section id="kopling" class="level2">
+<h2 class="anchored" data-anchor-id="kopling">Kopling</h2>
+<p>Knappen skal koplast til pin 5 og jord</p>
+<hr>
+<section id="før-de-programmerer" class="level3">
+<h3 class="anchored" data-anchor-id="før-de-programmerer">🔎 Før de programmerer</h3>
+<ul>
+<li>Kva er ein pullup-motstand?</li>
+<li>Kvifor treng me pullup-motstand med knappar?</li>
+<li>Kva betyr “intern pullup”?</li>
+<li>Kva skjer viss me ikkje bruker pullup?</li>
+</ul>
+</section>
+<section id="sjå-på-koden-i-boksen-under" class="level3">
+<h3 class="anchored" data-anchor-id="sjå-på-koden-i-boksen-under">👀 Sjå på koden i boksen under</h3>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Koden
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Led-pins er som før</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> raudLys <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> gulLys <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> gronLys <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> knappPin <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>     <span class="co">// Pin for knappen</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Variabel for å hugse tilstanden til lyset</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> erRaudt <span class="op">=</span> <span class="kw">true</span><span class="op">;</span>        <span class="co">// true = raudt lys, false = grønt lys</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Set opp LED-pins som før</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>raudLys<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>gulLys<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>gronLys<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Set opp knappen med intern pullup</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>knappPin<span class="op">,</span> INPUT_PULLUP<span class="op">);</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Start med raudt lys</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>raudLys<span class="op">,</span> HIGH<span class="op">);</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>gulLys<span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>gronLys<span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Les av knappen (LOW = trykt, pga pullup)</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>digitalRead<span class="op">(</span>knappPin<span class="op">)</span> <span class="op">==</span> LOW<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>erRaudt<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Viss lyset er raudt, bytt til grønt</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>      skiftTilGront<span class="op">();</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Viss lyset er grønt, bytt til raudt</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>      skiftTilRaudt<span class="op">();</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    delay<span class="op">(</span><span class="dv">500</span><span class="op">);</span>  <span class="co">// Enkel "debounce" - unngå fleire knappetrykk</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="co">// Funksjon for å skifte til grønt lys</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> skiftTilGront<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>gulLys<span class="op">,</span> HIGH<span class="op">);</span>    <span class="co">// Raudt + gult</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>raudLys<span class="op">,</span> LOW<span class="op">);</span>     <span class="co">// Skru av raudt</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>gulLys<span class="op">,</span> LOW<span class="op">);</span>     <span class="co">// Skru av gult</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>gronLys<span class="op">,</span> HIGH<span class="op">);</span>  <span class="co">// Skru på grønt</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  erRaudt <span class="op">=</span> <span class="kw">false</span><span class="op">;</span>              <span class="co">// Hugs at me no har grønt lys</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="co">// Funksjon for å skifte til raudt lys</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> skiftTilRaudt<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>gronLys<span class="op">,</span> LOW<span class="op">);</span>   <span class="co">// Skru av grønt</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>gulLys<span class="op">,</span> HIGH<span class="op">);</span>    <span class="co">// Skru på gult</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>  delay<span class="op">(</span><span class="dv">1000</span><span class="op">);</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>gulLys<span class="op">,</span> LOW<span class="op">);</span>     <span class="co">// Skru av gult</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>raudLys<span class="op">,</span> HIGH<span class="op">);</span>    <span class="co">// Skru på raudt</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  erRaudt <span class="op">=</span> <span class="kw">true</span><span class="op">;</span>               <span class="co">// Hugs at me no har raudt lys</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Kopier til utklippstavla" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ul>
+<li>Kva gjer variabelen <code>erRaudt</code>?</li>
+<li>Kvifor er knappen <code>LOW</code> når den er trykt?</li>
+<li>Kva er <code>delay(500)</code> til?</li>
+</ul>
+</section>
+<section id="utfordring" class="level3">
+<h3 class="anchored" data-anchor-id="utfordring">💪 Utfordring</h3>
+<p>Kan du få knappen til å virke berre når lyset har vore same farge i minst 5 sekund?</p>
+<p><strong>Hint:</strong> Du må bruke <code>millis()</code> for å måle tid</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

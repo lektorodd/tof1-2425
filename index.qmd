@@ -18,6 +18,10 @@ Relevant fagstoff til bruk i tof1 2024-2025.
 - [Intro 3 (09. september)](/intro3-python.ipynb)
 
 ## Andre greier
-
 - [Elektronikktest](elektronikktest.html)
-- [Elektronikktest løysingsforslag](elektronikktest%20lf.html)
+    - [Løysingsforslag](elektronikktest%20lf.html)
+- Arduino fagdag - opplegg og kode
+    - [Nivå 1 - sjølvstyrt trafikklys](ard1.qmd)
+    - [Nivå 2 - legge til knappstyring](ard2.qmd)
+    - [Nivå 2b - litt om transistor og PWM](ard2b.qmd)
+    - [Nivå 3 - "smart" trafikklys](ard3.qmd)

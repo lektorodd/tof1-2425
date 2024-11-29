@@ -1,0 +1,85 @@
+---
+title: "Nivå 2b - litt om transistor og PWM"
+---
+
+På tide å få inn transistoren!
+
+## Komponentar
+- 1 NPN-transistor
+- 4-6 like LEDar
+- 1 stk $1k\Omega$ motstand
+- 1 stk $220\Omega$ motstand
+- Breadboard og leidningar
+
+## Kopling
+
+1) Transistor
+    - Base med 1k motand til P9
+    - Emittor til jord
+    - Collector til LED
+
+2) LED
+    - Alle LED-minus til kollektor
+    - Alle led-plus gjenom $220\Omega$ til 5V
+
+3) Knapp
+    - Kopla til P5 og jord (som i [nivå 2](ard2.qmd))
+
+## Kode
+
+Pseudokode (tekst som forklarar kva koden skal gjera). Sjå om du klarar å skrive koden sjølv!
+
+> 1. Oppsett:
+>    - Me bruker pin 9 for transistor (må være PWM-pin)
+>    - Me bruker pin 5 for knapp med pullup
+> 
+> 2. Når knappen blir trykt:
+>    - Først: Full styrke på LED-ane i 2 sekund
+>    - Så: Start dimming
+>      * Bruk ein loop som går frå 255 ned til 0
+>      * Bruk analogWrite() for å styre styrken
+>      * Liten delay() mellom kvar endring
+>    - Til slutt: Alt av i 1 sekund
+> 
+> 3. Når knappen ikkje er trykt:
+>    - Alle LED-ar skal vere av
+
+
+### Tips
+- PWM (`analogWrite`) bruker verdiar frå 0-255
+- Større tall ➡️ sterkare lys
+- Prøv ulike hastigheiter på dimminga
+
+::: {.callout-tip collapse="true"}
+## Startkode
+
+Her finn du eit utgangspunkt for koden viss du treng det. 
+
+```cpp
+// Pin-definisjonar
+const int transistorPin = 9;  // MÅ vere ein PWM-pin
+const int knappPin = 5;       // Knapp for å styre LED-ane
+
+void setup() {
+  pinMode(transistorPin, OUTPUT);
+  pinMode(knappPin, INPUT_PULLUP);
+  
+  // Start med LED-ane av
+  digitalWrite(transistorPin, LOW);
+}
+
+void loop() {
+  // Les av knappen
+  if (digitalRead(knappPin) == LOW) {
+    // DIN KODE HER:
+    // 1. Skru på LED-ane med full styrke
+    // 2. Vent litt
+    // 3. Start dimming med for-loop
+    // 4. Vent før neste runde
+  }
+  else {
+    digitalWrite(transistorPin, LOW);  // LED-ane av når knappen ikkje er trykt
+  }
+}
+```
+:::

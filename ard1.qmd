@@ -1,0 +1,55 @@
+---
+title: "Nivå 1 - sjølvstyrt trafikklys"
+---
+
+## Komponentar
+- 3 LED (raud, gul, grøn)
+- 3 motstandar ($220\Omega$)
+- Breadboard og leidningar
+
+## Kopling
+
+Hugs retning på LED. 
+
+![](./img/nivå1.png){width=100%}
+
+## Kode
+
+```cpp
+// Først gjev me namn til pinnane
+// Dette gjer koden lettare å lese og forstå
+const int raudLys = 2;    // Raud LED kopla til pin 2
+const int gulLys = 3;     // Gul LED kopla til pin 3
+const int gronLys = 4;    // Grøn LED kopla til pin 4
+
+void setup() {
+  // Her fortel me Arduino at desse pinnane skal vere utgangar
+  pinMode(raudLys, OUTPUT);
+  pinMode(gulLys, OUTPUT);
+  pinMode(gronLys, OUTPUT);
+}
+
+void loop() {
+  // RAUDT LYS
+  digitalWrite(raudLys, HIGH);  // Raudt på
+  digitalWrite(gulLys, LOW);    // Gult av
+  digitalWrite(gronLys, LOW);   // Grønt av
+  delay(4000);                  // Vent 4 sekund
+  
+  // RAUDT OG GULT LYS
+  digitalWrite(gulLys, HIGH);   // Skrur på gult (raudt er fortsatt på)
+  delay(1000);                  // Vent 1 sekund
+  
+  // GRØNT LYS
+  digitalWrite(raudLys, LOW);   // Raudt av
+  digitalWrite(gulLys, LOW);    // Gult av
+  digitalWrite(gronLys, HIGH);  // Grønt på
+  delay(4000);                  // Vent 4 sekund
+  
+  // GULT LYS
+  digitalWrite(gronLys, LOW);   // Grønt av
+  digitalWrite(gulLys, HIGH);   // Gult på
+  delay(1000);                  // Vent 1 sekund
+  // Så startar alt på nytt!
+}
+```

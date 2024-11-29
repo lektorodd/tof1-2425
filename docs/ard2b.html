@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – Teknologi og forskningslære 1 - AMA</title>
+<title>Nivå 2b - litt om transistor og PWM – Teknologi og forskningslære 1 - AMA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -67,6 +101,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -103,15 +166,26 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">På denne sida</h2>
+   
+  <ul>
+  <li><a href="#komponentar" id="toc-komponentar" class="nav-link active" data-scroll-target="#komponentar">Komponentar</a></li>
+  <li><a href="#kopling" id="toc-kopling" class="nav-link" data-scroll-target="#kopling">Kopling</a></li>
+  <li><a href="#kode" id="toc-kode" class="nav-link" data-scroll-target="#kode">Kode</a>
+  <ul class="collapse">
+  <li><a href="#tips" id="toc-tips" class="nav-link" data-scroll-target="#tips">Tips</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">Nivå 2b - litt om transistor og PWM</h1>
 </div>
 
 
@@ -128,9 +202,116 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>About this site</p>
+<p>På tide å få inn transistoren!</p>
+<section id="komponentar" class="level2">
+<h2 class="anchored" data-anchor-id="komponentar">Komponentar</h2>
+<ul>
+<li>1 NPN-transistor</li>
+<li>4-6 like LEDar</li>
+<li>1 stk <span class="math inline">\(1k\Omega\)</span> motstand</li>
+<li>1 stk <span class="math inline">\(220\Omega\)</span> motstand</li>
+<li>Breadboard og leidningar</li>
+</ul>
+</section>
+<section id="kopling" class="level2">
+<h2 class="anchored" data-anchor-id="kopling">Kopling</h2>
+<ol type="1">
+<li>Transistor
+<ul>
+<li>Base med 1k motand til P9</li>
+<li>Emittor til jord</li>
+<li>Collector til LED</li>
+</ul></li>
+<li>LED
+<ul>
+<li>Alle LED-minus til kollektor</li>
+<li>Alle led-plus gjenom <span class="math inline">\(220\Omega\)</span> til 5V</li>
+</ul></li>
+<li>Knapp
+<ul>
+<li>Kopla til P5 og jord (som i <a href="./ard2.html">nivå 2</a>)</li>
+</ul></li>
+</ol>
+</section>
+<section id="kode" class="level2">
+<h2 class="anchored" data-anchor-id="kode">Kode</h2>
+<p>Pseudokode (tekst som forklarar kva koden skal gjera). Sjå om du klarar å skrive koden sjølv!</p>
+<blockquote class="blockquote">
+<ol type="1">
+<li>Oppsett:
+<ul>
+<li>Me bruker pin 9 for transistor (må være PWM-pin)</li>
+<li>Me bruker pin 5 for knapp med pullup</li>
+</ul></li>
+<li>Når knappen blir trykt:
+<ul>
+<li>Først: Full styrke på LED-ane i 2 sekund</li>
+<li>Så: Start dimming
+<ul>
+<li>Bruk ein loop som går frå 255 ned til 0</li>
+<li>Bruk analogWrite() for å styre styrken</li>
+<li>Liten delay() mellom kvar endring</li>
+</ul></li>
+<li>Til slutt: Alt av i 1 sekund</li>
+</ul></li>
+<li>Når knappen ikkje er trykt:
+<ul>
+<li>Alle LED-ar skal vere av</li>
+</ul></li>
+</ol>
+</blockquote>
+<section id="tips" class="level3">
+<h3 class="anchored" data-anchor-id="tips">Tips</h3>
+<ul>
+<li>PWM (<code>analogWrite</code>) bruker verdiar frå 0-255</li>
+<li>Større tall ➡️ sterkare lys</li>
+<li>Prøv ulike hastigheiter på dimminga</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Startkode
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Her finn du eit utgangspunkt for koden viss du treng det.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Pin-definisjonar</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> transistorPin <span class="op">=</span> <span class="dv">9</span><span class="op">;</span>  <span class="co">// MÅ vere ein PWM-pin</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> knappPin <span class="op">=</span> <span class="dv">5</span><span class="op">;</span>       <span class="co">// Knapp for å styre LED-ane</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>transistorPin<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>knappPin<span class="op">,</span> INPUT_PULLUP<span class="op">);</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Start med LED-ane av</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>transistorPin<span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Les av knappen</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(</span>digitalRead<span class="op">(</span>knappPin<span class="op">)</span> <span class="op">==</span> LOW<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// DIN KODE HER:</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 1. Skru på LED-ane med full styrke</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 2. Vent litt</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 3. Start dimming med for-loop</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// 4. Vent før neste runde</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    digitalWrite<span class="op">(</span>transistorPin<span class="op">,</span> LOW<span class="op">);</span>  <span class="co">// LED-ane av når knappen ikkje er trykt</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Kopier til utklippstavla" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

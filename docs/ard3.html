@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>About – Teknologi og forskningslære 1 - AMA</title>
+<title>Nivå 3 - smart trafikklys – Teknologi og forskningslære 1 - AMA</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -103,15 +137,24 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">På denne sida</h2>
+   
+  <ul>
+  <li><a href="#komponentar" id="toc-komponentar" class="nav-link active" data-scroll-target="#komponentar">Komponentar</a></li>
+  <li><a href="#kopling-av-sensor" id="toc-kopling-av-sensor" class="nav-link" data-scroll-target="#kopling-av-sensor">Kopling av sensor</a></li>
+  <li><a href="#pseudokoden" id="toc-pseudokoden" class="nav-link" data-scroll-target="#pseudokoden">Pseudokoden</a></li>
+  <li><a href="#oppgåver" id="toc-oppgåver" class="nav-link" data-scroll-target="#oppgåver">Oppgåver</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">About</h1>
+<h1 class="title">Nivå 3 - <em>smart</em> trafikklys</h1>
 </div>
 
 
@@ -128,9 +171,209 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>About this site</p>
+<p>No skal me gjera trafikklyset “smart”.</p>
+<ul>
+<li>Ultralydsensoren skal oppdage når nokon nærmar seg</li>
+<li>Lyset skal skifte til grønt når nokon er nær nok</li>
+<li>Me bruker HC-SR04 ultralydsensor</li>
+</ul>
+<p>Korleis virkar ultralydsensoren?</p>
+<ul>
+<li>Sender ut ein høgfrekvens lyd (trigger)</li>
+<li>Måler tida til lyden kjem tilbake (echo)</li>
+</ul>
+<section id="komponentar" class="level2">
+<h2 class="anchored" data-anchor-id="komponentar">Komponentar</h2>
+<ul>
+<li>Alt frå <a href="./ard1.html">nivå 1</a> (trafikklys med 3 LED)</li>
+<li>HC-SR04 ultralydsensor</li>
+<li>4 koblingskabler</li>
+<li>(LED og transistor frå <a href="./ard2b.html">nivå 2B</a> er ikkje med her)</li>
+</ul>
+</section>
+<section id="kopling-av-sensor" class="level2">
+<h2 class="anchored" data-anchor-id="kopling-av-sensor">Kopling av sensor</h2>
+<ul>
+<li>VCC → 5V på Arduino</li>
+<li>GND → GND på Arduino</li>
+<li>TRIG → pin 7 på Arduino</li>
+<li>ECHO → pin 6 på Arduino</li>
+</ul>
+</section>
+<section id="pseudokoden" class="level2">
+<h2 class="anchored" data-anchor-id="pseudokoden">Pseudokoden</h2>
+<blockquote class="blockquote">
+<ol type="1">
+<li>Oppsett:
+<ul>
+<li>LED-pins som før (2,3,4)</li>
+<li>TRIG pin 7</li>
+<li>ECHO pin 6</li>
+</ul></li>
+<li>Funksjon for å måle avstand:
+<ul>
+<li>Send ut kort puls på TRIG (10 mikrosekund)</li>
+<li>Mål kor lang tid ECHO er HIGH</li>
+<li>Rekn ut avstanden</li>
+</ul></li>
+<li>Hovudprogram:
+<ul>
+<li>Mål avstanden</li>
+<li>Viss avstand mindre enn 50cm:
+<ul>
+<li>Skift til grønt lys (med normal sekvens)</li>
+</ul></li>
+<li>Viss avstand større enn 50cm og lyset er grønt:
+<ul>
+<li>Skift til raudt lys (med normal sekvens)</li>
+</ul></li>
+<li>Vent litt før neste måling</li>
+</ul></li>
+</ol>
+</blockquote>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tips
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Bruk <code>pulseIn()</code> for å måle ECHO-tid</li>
+<li><em>Veg, fart og tid</em> for å rekna ut avstanden (ECHO-tid i millisekund)</li>
+<li>Legg inn ein liten delay for å unngå flimring</li>
+<li>Test ulike avstandar</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="oppgåver" class="level2">
+<h2 class="anchored" data-anchor-id="oppgåver">Oppgåver</h2>
+<ol start="0" type="1">
+<li>Start med å få sensoren til å funka</li>
+</ol>
+<ul>
+<li>Lyden går ca. 340 m/s.</li>
+<li>Korleis kan me rekna ut avstanden til eit objekt?</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tips for utrekning av avstand
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For å lesa av utrekna avstand kan de feks. bruka denne kodesnutten ( i <code>loop</code>)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Skriv ut avstanden (for testing)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>Serial<span class="op">.</span>print<span class="op">(</span><span class="st">"Avstand: "</span><span class="op">);</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Serial<span class="op">.</span>print<span class="op">(</span>avstand<span class="op">);</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Serial<span class="op">.</span>println<span class="op">(</span><span class="st">" cm"</span><span class="op">);</span></span></code><button title="Kopier til utklippstavla" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Startkode
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb2"><pre class="sourceCode cpp code-with-copy"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// LED-pins</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> raudLys <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> gulLys <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> gronLys <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Ultralydsensor</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> trigPin <span class="op">=</span> <span class="dv">7</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> echoPin <span class="op">=</span> <span class="dv">6</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Variablar</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> erRaudt <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> grenseAvstand <span class="op">=</span> <span class="dv">50</span><span class="op">;</span>  <span class="co">// Grense i cm</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> setup<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Set opp LED-pins</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>raudLys<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>gulLys<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>gronLys<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Set opp ultralydsensor</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>trigPin<span class="op">,</span> OUTPUT<span class="op">);</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  pinMode<span class="op">(</span>echoPin<span class="op">,</span> INPUT<span class="op">);</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Start med raudt lys</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>raudLys<span class="op">,</span> HIGH<span class="op">);</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>gulLys<span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  digitalWrite<span class="op">(</span>gronLys<span class="op">,</span> LOW<span class="op">);</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Start seriell kommunikasjon for testing</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>begin<span class="op">(</span><span class="dv">9600</span><span class="op">);</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="co">// Funksjon for å måle avstand</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> maalAvstand<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="co">// DIN KODE HER:</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 1. Send ut triggerpuls</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 2. Mål echo-tid med pulseIn()</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 3. Rekn ut avstanden i cm</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span>  <span class="co">// Erstatt med din kode</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> loop<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Les av avstanden</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span> avstand <span class="op">=</span> maalAvstand<span class="op">();</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Skriv ut avstanden (for testing)</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span><span class="st">"Avstand: "</span><span class="op">);</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>print<span class="op">(</span>avstand<span class="op">);</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  Serial<span class="op">.</span>println<span class="op">(</span><span class="st">" cm"</span><span class="op">);</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  <span class="co">// DIN KODE HER:</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 1. Sjekk avstanden</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 2. Endre lys viss nødvendig</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  <span class="co">// 3. Legg inn kort pause</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="co">// Bruk funksjonane frå nivå 2 for å skifte lys</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> skiftTilGront<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Din kode her (kopier frå nivå 2)</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> skiftTilRaudt<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Din kode her (kopier frå nivå 2)</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Kopier til utklippstavla" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<ol type="1">
+<li>Få grunnfunksjonen til å virke:</li>
+</ol>
+<ul>
+<li>Mål avstand</li>
+<li>Skriv ut til serial monitor for å teste</li>
+<li>Få lyset til å skifte ved rett avstand</li>
+</ul>
+<ol start="2" type="1">
+<li>Eksperimenter med:</li>
+</ol>
+<ul>
+<li>Kva er best grenseavstand?</li>
+<li>Kor ofte bør me måle avstanden?</li>
+<li>Kor lenge bør lyset vere grønt?</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
